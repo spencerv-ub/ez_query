@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EZ Query</title>
+    <!-- Importing AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Importing HTMX -->
+    <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
+    <!-- Importing Simple CSS (until we need to make custom CSS) -->
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <!-- Importing Custom CSS using JINJA2 to navigate -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/basic.css') }}">
+</head>
+
+<script src="{{ url_for('static', filename='js/functions.js') }}"></script>
+
+<body>
+    <main>
+        <div id="main_container" hx-trigger="load" hx-get="htmx_pane_login">
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<div id="pane_login">
+    <h1>Enter Login Information</h1>
+    <form id="form_login">
+        <div class="db_login_box">
+            <h2>Connection</h2>
+            <div>
+                <label id="db_name_label" for="db_name">Database </label>
+                <select name="db_name" id="db_select">
+                    {% for database in databases %}
+                        <option value="{{database}}"> {{database.upper()}} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label id="db_username_label" for="db_username">Database Username</label>
+                <input type="text" name="db_username">
+            </div>
+            <div>
+                <label id="db_password_label" for="db_password">Database Password</label>
+                <input type="password" name="db_password">
+            </div>
+        </div>
+        <button type="button" onclick="process_login()">Login</button>
+    </form>
+</div>

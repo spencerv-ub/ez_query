@@ -1,0 +1,25 @@
+<div id="pane_control">
+    <div id="pane_logout">
+        <div>Currently connected to: {{db_connection_name}}</div>
+        <!-- This doesn't work for some reason so we're cutting our losses for now -->
+        <button type="button" onclick="htmx_process_logout()">Disconnect</button>
+    </div>
+</div>
+<div id="pane_select">
+    <form id="form_select">
+        {% for option in options_to_create.keys() %}
+        <label for="{{option}}">
+            <div>
+                {{options_to_create[option]['name_readable']}}
+                <input value="{{option}}" id="{{option}}" name="query_choice" type="radio" onChange="load_binds(this)">
+            </div>
+        </label>
+        {% endfor %}
+    </form>
+</div>
+<div id="pane_input">
+    <form id="form_query_input"></form>
+    <button type="button" onclick="process_run_query()">Run Query</button>
+</div>
+<div id="pane_output">
+</div>

@@ -1,0 +1,26 @@
+/build
+/dist
+*.spec
+launch.json
+__pycache__
+config.json
+config_sunyir.json
+compile.bat
+driver.py
+pleiades.py
+/jamais_vu
+/output*
+*.bat
+LOG -*
+*.txt
+!requirements.txt
+/logs
+/driver
+/pleiades_deconstructor
+threadling.py
+playground*.py
+*.dms
+/playground-*
+.env
+/queries
+manifest.json

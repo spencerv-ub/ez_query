@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+html {
+    text-rendering: optimizeLegibility;
+}
+
+* {
+    text-rendering: inherit;
+    transition: .2s;
+}
+
+:root {
+    --color_accent: #005bbb;
+    --color_background: #212121;
+    --color_text: #dcdcdc;
+
+    --accent: var(--color_accent);
+    --bg: var(--color_background);
+    --text: var(--color_text);
+}
+
+div + div {
+    margin-top: 2rem;
+}
+
+#form_select {
+    display: flex;
+    flex-wrap: wrap;
+    height: 25vh;
+    overflow: scroll;
+    border: .125rem solid var(--color_accent);
+    align-content: flex-start;
+}
+
+#form_select label {
+    flex-grow: 1;
+    text-align: center;
+}
+
+#form_select div {
+    padding: 1rem;
+    margin: auto;
+}
+
+#form_select input[type=radio] {
+    display: none;
+}
+
+#form_select label:nth-child(odd)>div {
+    background-color: oklab(from var(--color_background) calc(l - 0.025) a b);;
+}
+
+#form_select label:nth-child(even)>div {
+    background-color: oklab(from var(--color_background) calc(l + 0.025) a b);;
+}
+
+#form_select label:hover>div {
+    background-color: VAR(--color_accent);
+    color: var(--color_text);
+}
+
+#form_select label:has(input:checked)>div {
+    color: var(--color_text);
+    background-color: oklab(from var(--color_accent) calc(l + 0.075) a b);
+}
+
+.form_query_input_field_container {
+    display: flex;
+}
+
+.form_query_input_field_container input {
+    order: 1
+}
+
+.form_query_input_field_container label {
+    order: 0
+}

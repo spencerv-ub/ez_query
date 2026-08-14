@@ -1,0 +1,484 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@font-face {
+  font-family: 'Runic';
+  src: url('/thebox/siteWideAssets/fonts/RunicCelestialLC.otf') format('opentype');
+}
+
+:root {
+  --pageR: 0;
+  --pageG: 128;
+  --pageB: 255;
+  --primaryColor: rgb(var(--pageR), var(--pageG), var(--pageB));
+  --highlightColor: #fff;
+  --textcolor: #000;
+  --overlayColor: #ffffff80;
+  --backgroundColor: #eee;
+  --headerFont: 'Roboto Slab', serif;
+  --bodyFont: 'Inter';
+  --a0grey: #00000033;
+  --a1grey: #00000030;
+
+  --color0: #00000000;
+  --color1: #304D73;
+  --color2: #91BDD9;
+  --color3: #6a96b1;
+  --color4: #D8E8F2;
+  --color5: #F2E6DF;
+  --color6: #F3F4F6;
+  --color7: #F2BBBF;
+
+  --backgroundColor: var(--color5);
+  --primaryColor: var(--color6);
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+*[onClick],
+*[onclick],
+*[href] {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#et-al * {
+  transition: .2s;
+}
+
+#et-al>* {
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  max-width: 75%;
+  padding: 5px;
+}
+
+html,
+body {
+  margin: 0;
+  height: auto;
+  color: var(--textColor);
+  font-family: var(--bodyFont);
+  font-weight: 400;
+  font-size: 1rem;
+  background-color: var(--backgroundColor);
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  padding-bottom: 2rem;
+}
+
+nav {
+  text-align: center;
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+nav ul {
+  overflow: auto;
+  background-color: var(--primaryColor);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  color: inherit;
+  display: inline-block;
+}
+
+nav ul li a {
+  font-family: var(--headerFont);
+  display: inherit;
+  padding: 1rem;
+  font-size: 1.25rem;
+  transition: .2s;
+  background-color: var(--primaryColor);
+  color: var(--highlightColor);
+  text-decoration: none;
+  margin: 0;
+}
+
+nav ul li a:hover {
+  color: var(--primaryColor);
+  background-color: var(--highlightColor);
+}
+
+/* Begin Pulse Nav Styling Rules */
+nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: var(--primaryColor);
+  padding: 0 !important;
+}
+
+nav a {
+  text-decoration: none;
+  padding: 1rem;
+  color: #fff;
+  font-family: var(--headerFont);
+  transition: .2s;
+}
+
+nav a:hover {
+  color: var(--primaryColor);
+  background-color: #fff;
+}
+
+/* End Pulse Nav Styling Rules */
+
+h1 {
+  font-family: var(--headerFont);
+  font-weight: 700;
+  font-size: 2rem;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+p {
+  text-align: left;
+  text-indent: 2rem;
+}
+
+:is(h1, h2, h3, h4, h5) {
+  margin-top: 1rem;
+  margin-bottom: .5rem;
+  display: block;
+  font-family: var(--headerFont);
+}
+
+section :is(h1, h2, h3, h4, h5) {
+  padding-bottom: .5rem;
+}
+
+section div+p {
+  padding-top: .5rem;
+}
+
+section div span {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  display: block;
+  font-weight: bold;
+}
+
+main>div {
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  max-width: 75%;
+  padding: 5px;
+}
+
+.dossierBigText {
+  margin-top: 1rem;
+  margin-bottom: .5rem;
+  display: block;
+  font-family: var(--headerFont);
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/*Start Navbar Rules*/
+
+#navbar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+  background-color: var(--overlayColor);
+  box-shadow: 2px 0px 0px 0px var(--primaryColor);
+  overflow-x: hidden;
+  transition: 0.5s, opacity 0.1s;
+  opacity: 0;
+}
+
+#navbar h1 {
+  padding: .25rem .5rem .75rem;
+  color: var(--textColor);
+  display: block;
+  transition: 0.3s;
+  text-align: center;
+  border-bottom: .125rem solid var(--primaryColor);
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#navbar a {
+  padding: .5rem .5rem .5rem 32px;
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: var(--textColor);
+  display: block;
+  transition: 0.2s;
+  text-align: left;
+  font-family: var(--headerFont);
+  font-weight: 400;
+}
+
+#navbar a:hover {
+  color: var(--highlightColor);
+  border-left: .25rem solid var(--highlightColor);
+}
+
+#navbar a.active {
+  color: var(--primaryColor);
+  border-left: .25rem solid var(--primaryColor);
+}
+
+#navbar #navNavToggle {
+  position: absolute;
+  top: 0;
+  right: 2rem;
+  font-size: 3rem;
+  margin-left: 50px;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  margin: 1rem 0;
+  transition: .5s;
+}
+
+#header {
+  display: flex;
+  text-align: center;
+  font-family: var(--headerFont);
+  font-size: 2rem;
+  padding: 0.5rem;
+  margin: auto;
+  width: auto;
+  color: var(--textColor);
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#pageNavToggle {
+  top: 0;
+  left: 0;
+  background-color: var(--overlayColor);
+  padding: 1.5rem;
+  color: var(--primaryColor);
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 0 1.5rem 1.5rem 0;
+  width: auto;
+  display: block;
+  margin: auto auto auto 0;
+  transition: .5s;
+  border: 2px solid var(--primaryColor);
+}
+
+#et-al {
+  display: block;
+  transition: .5s;
+  min-width: 288px;
+}
+
+/*End Navbar Rules*/
+
+/*Begin Landing Page Navigation Rules*/
+
+#navigationHub a {
+  margin: 1rem auto;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: .2s;
+
+  max-width: 35%;
+  line-height: 170%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  font-size: 2rem;
+  color: var(--backgroundColor);
+  background-color: var(--textColor);
+
+  font-family: var(--headerFont);
+  border: .125rem solid var(--primaryColor);
+}
+
+#navigationHub a:hover {
+  transform: scale(1.05);
+  /*box-shadow: 0 4px 8px 0 var(--a0grey), 0 6px 20px 0 var(--a1grey);*/
+}
+
+
+/*End Landing Page Navigation Rules*/
+
+/*Begin Runic and Glitch rules*/
+/*This does not NEED to be here, but it will likely make it easier for dragging and dropping functionality between pages*/
+
+.runic {
+  font-family: 'Runic', sans-serif;
+}
+
+.not-runic {
+  font-family: var(--bodyFont);
+}
+
+/*End Runic and Glitch rules*/
+
+/*Begin Unified Table Styling rules*/
+
+.invis {
+  display: none;
+}
+
+th.sortable {
+  user-select: none;
+  cursor: pointer;
+}
+
+/*End Unified Table Styling  rules*/
+
+/*Begin Mobile Optimizing Rules*/
+
+@media (max-width: 760px),
+(max-device-width: 1024px) {
+  #navigationHub a {
+    height: auto;
+    padding: 3% 1%;
+    max-width: 85%;
+    display: block;
+  }
+
+  nav ul {
+    justify-content: left;
+  }
+
+  #et-al>* {
+    max-width: 90%;
+  }
+}
+
+/*End Mobile Optimizing Rules*/
+
+@font-face {
+    font-family: 'Lobster';
+    src: url('/thebox/siteWideAssets/fonts/Lobster-Regular.ttf') format('truetype');
+}
+
+:root {
+    --color0: #00000000;
+    --color1: #304D73;
+    --color2: #91BDD9;
+    --color3: #6a96b1;
+    --color4: #D8E8F2;
+    --color5: #F2E6DF;
+    --color6: #F3F4F6;
+    --color7: #F2BBBF;
+
+    --backgroundColor: var(--color5);
+    --primaryColor: var(--color6);
+
+    --headerFont: 'Roboto Slab', serif;
+}
+
+main div,
+#navbar a,
+#navbar h1,
+#navigation,
+#pageNavToggle,
+#navbar,
+#navGrid #prevImage,
+#navGrid #nextImage {
+    color: var(--color1);
+    border-color: var(--color2);
+}
+
+#pageNavToggle,
+#navbar {
+    background-color: var(--color4);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+}
+
+form * {
+    padding: .5rem
+}
+
+h2,
+h3 {
+    border-bottom: .125rem solid var(--color2);
+}
+
+main #mainContainer,
+main #imageInfoContainer {
+    border: .125rem solid var(--color2);
+    background-color: var(--color4);
+    color: var(--color1);
+    padding: 1rem;
+}
+
+#imageInfoContainer {
+    margin-top: 1rem;
+}
+
+#navbar {
+    box-shadow: 2px 0px 0px 0px var(--color2);
+}
+
+#navbar a.active {
+    color: var(--color3);
+    border-color: var(--color3);
+}
+
+#navbar a:hover {
+    color: var(--color2);
+    border-color: var(--color2);
+}
+
+#header {
+    color: var(--color7);
+    text-shadow:
+        1px 1px 0px var(--color1), 2px 2px 0px var(--color1), 3px 3px 0px var(--color1), 4px 4px 0px var(--color1), 5px 5px 0px var(--color1);
+    font-family: 'Lobster';
+    font-size: 3rem;
+    position: relative;
+    background: var(--color0);
+    z-index: 0;
+}
+
+form {
+    padding-top: 0;
+    padding-bottom: 1rem;
+}
+
+form label {
+    padding-left: 0;
+}
+
+form * {
+    max-width: 65%;
+    margin: .5rem auto;
+}
+
+/* Begin custom compare styling */
+
