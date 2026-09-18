@@ -1,0 +1,1 @@
+select distinct ub_process_name, count(*) from PS_UB_UJO_PSFT_JOB group by ub_process_name order by ub_process_name asc

@@ -1,0 +1,1 @@
+select * from pspcmtxt where pctext like '%'||:the_something||'%'

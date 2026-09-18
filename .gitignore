@@ -22,5 +22,4 @@ playground*.py
 *.dms
 /playground-*
 .env
-/queries
 manifest.json
