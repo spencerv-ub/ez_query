@@ -214,9 +214,9 @@ div.table_body {
   /* width: 75vw; */
 }
 
-&:has([name="display_output_column"]:checked) {
+&:has([name="display_output_as_column"]:checked) {
     div.table_body {
-        overflow-x: auto;
+        overflow-x: unset;
         flex-direction: column;
     }
 }
