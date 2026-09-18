@@ -135,13 +135,72 @@ def process_query_run(submission: dict, database_connections: tuple):
     binds = submission['binds']
     query = submission['manifest_key']
 
+    options = submission['options']
+
+    # Unused for now.
+    for i in options.keys():
+        if options[i] == 'true':
+            options[i] = True
+        else:
+            options[i] = False
+
     f = open(f'queries{os.sep}{query}.sql', 'r')
     opened_query = f.read()
 
     query_cursor = database_connections[0]
 
-    returned = ub_utility.query_to_dict(query_cursor.execute(opened_query, binds))   
-    ub_debug.log('debug', returned)
-    ub_debug.log('debug', submission)
+    returned = ub_utility.query_to_dict(query_cursor.execute(opened_query, binds))
+
+    # Can't modify dictionary keys in Python, so we're just going to change the labels in JS as we load them.
+    # We CAN modify the data in the fields, however.
+
+    if options['attempt_data_cleaning']:
+        returned = attempt_data_cleaning(returned, query)
+
+    if options['rationalize_peoplecode_ids']:
+        returned = rationalize_peoplecode_ids(returned, query)
+
+    # ub_debug.log('debug', f'Returned value: {returned}')
+    # ub_debug.log('debug', f'Original submission: {submission}')
 
     return returned
+
+def attempt_data_cleaning(query_dict_list: list, original_query_name: str):
+    # General Cleaning
+    for row in query_dict_list:
+        for key in row.keys():
+            data = row[key]
+
+            if type(data) is str:
+                # Day processing only needs to be done for these specific fields.
+                # Easy check is if "day" is in the field name.
+                if 'day' in key.lower():
+                    values = data.split(',')
+                    if len(values) > 1:
+                        # Replace abbreviated days with full day name.
+                        # Can be done with a static list or dynamically based on a list of days
+                        # Using derivation from list of days for better fault tolerance
+                        days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+                        for day in days:
+                            values = [day if x.lower() == day[0:2].lower() else x for x in values]
+
+                        data = ', '.join(values)
+
+                if key.lower() == 'ub_run_window':
+                    data = re.sub(r'(\d{1,2}:\d{1,2})-(\d{1,2}:\d{1,2})',r'\1 - \2', data)
+                
+            row[key] = data
+
+    return query_dict_list
+
+
+def rationalize_peoplecode_ids(query_dict_list: list, original_query_name: str):
+    peoplecode_id_fields = ['OBJECTID1', 'OBJECTID2', 'OBJECTID3', 'OBJECTID4', 'OBJECTID5', 'OBJECTID6', 'OBJECTID7']
+
+    for row in query_dict_list:
+        for id_field in peoplecode_id_fields:
+            data = ub_utility.ID_LIST[row[id_field]]
+                
+            row[id_field] = data
+
+    return query_dict_list

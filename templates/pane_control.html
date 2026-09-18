@@ -6,7 +6,12 @@
     </div>
 </div>
 <div id="pane_select">
-    <form id="form_select">
+    <div class="box_input_container">
+    <div class="box_header">
+        Available Queries
+    </div>
+    <div>
+        <form id="form_select">
         {% for option in options_to_create.keys() %}
         <label for="{{option}}">
             <div>
@@ -16,10 +21,44 @@
         </label>
         {% endfor %}
     </form>
+    </div>
+    </div>
 </div>
 <div id="pane_input">
-    <form id="form_query_input"></form>
+    <div class="box_input_container">
+        <div class="box_header">
+            Query Options
+        </div>
+        <form id="form_query_options">
+            {% for option in query_options.keys() %}
+            <div class="form_query_options_field_container">
+                <label for="{{option}}">{{query_options[option]}}</label>
+                <input id="{{option}}" name="{{option}}" type="checkbox" onChange="validate_check(this)">
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+    <div class="box_input_container">
+        <div class="box_header">
+            Query Binds
+        </div>
+        <div id="form_query_input_options_container">
+            <form id="form_query_input"></form>    
+        </div>
+    </div>
     <button type="button" onclick="process_run_query()">Run Query</button>
 </div>
 <div id="pane_output">
+    <div class="box_output_container">
+        <div class="box_header">
+            Query Results
+        </div>
+        {% for option in output_options.keys() %}
+            <div class="form_query_options_field_container">
+                <label for="{{option}}">{{output_options[option]}}</label>
+                <input id="{{option}}" name="{{option}}" type="checkbox">
+            </div>
+        {% endfor %}
+        <div id="box_output"></div>
+    </div>
 </div>

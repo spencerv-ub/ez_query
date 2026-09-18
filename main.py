@@ -29,6 +29,18 @@ app = Flask(__name__)
 
 database_connections = tuple()
 
+query_options = ['readable_labels', 'allow_sort_overrides', 'attempt_data_cleaning', 'clean_bind_names', 'rationalize_peoplecode_ids']
+
+output_options = ['display_output_as_column']
+
+query_options_dict = {}
+
+output_options_dict = {}
+
+for i in query_options: query_options_dict[i] = i.replace('_', ' ' ).title()
+
+for i in output_options: output_options_dict[i] = i.replace('_', ' ' ).title()
+
 @app.route('/', methods=['GET', 'POST'])
 def index(): return render_template('index.html')
 
@@ -124,7 +136,7 @@ def htmx_pane_login():
 @app.route('/htmx_load_control', methods=['GET'])
 def htmx_load_logout():
     ub_debug.log('debug', functions.get_db_name(database_connections=database_connections))
-    return render_template('pane_control.html', db_connection_name = functions.get_db_name(database_connections=database_connections), options_to_create = functions.read_manifest())
+    return render_template('pane_control.html', db_connection_name = functions.get_db_name(database_connections=database_connections), options_to_create = functions.read_manifest(), query_options = query_options_dict, output_options = output_options_dict)
 
 @app.route('/htmx_process_logout', methods=['GET'])
 def htmx_process_logout():

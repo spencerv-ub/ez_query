@@ -1,6 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
+@media (prefers-color-scheme: dark) {
+  &:has([name="toggle-color-scheme"]:checked) {
+    color-scheme: light;
+  }
+}
+@media (prefers-color-scheme: light) {
+  &:has([name="toggle-color-scheme"]:checked) {
+    color-scheme: dark;
+  }
+}
+
 html {
     text-rendering: optimizeLegibility;
 }
@@ -11,17 +22,63 @@ html {
 }
 
 :root {
+    color-scheme: light dark;
+
     --color_accent: #005bbb;
-    --color_background: #212121;
-    --color_text: #dcdcdc;
+    --color_background: light-dark(#f4f4f4, #212121);
+    --color_background_accent: light-dark(
+        oklab(from var(--color_background) calc(l - .15) calc(a + 0) calc(b + 0)),
+        oklab(from var(--color_background) calc(l + .15) calc(a + 0) calc(b + 0))
+    );
+    --color_text: light-dark(#303030, #dcdcdc);
+    --color_accent_hover: oklab(from var(--color_accent) calc(l + .15) calc(a + 0) calc(b + 0));
+    --color_text_on_accent: #f4f4f4;
+
+    --value_width_border: .125rem;
 
     --accent: var(--color_accent);
     --bg: var(--color_background);
     --text: var(--color_text);
+    --accent-hover: var(--color_accent_hover);
+    /* --border: var(--color_accent); */
+    --border-width: var(--value_width_border);
+}
+
+body {
+    color: var(--color_text);
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+body > header {
+    background-color: var(--color_background_accent);
+    text-align: center;
+    grid-column: 1/-1;
+    padding: 0 .5rem 2rem;
 }
 
 div + div {
     margin-top: 2rem;
+}
+
+#pane_logout {
+    display: flex;
+    border-bottom: var(--color_accent) solid .125rem;
+}
+
+#pane_logout * {
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+#pane_logout :not(button) {
+    flex-grow: 1;
+}
+
+.box_header {
+    padding: 1rem;
+    border-bottom: var(--color_accent) solid .125rem;
 }
 
 #form_select {
@@ -36,6 +93,7 @@ div + div {
 #form_select label {
     flex-grow: 1;
     text-align: center;
+    margin: .5rem;
 }
 
 #form_select div {
@@ -56,17 +114,40 @@ div + div {
 }
 
 #form_select label:hover>div {
-    background-color: VAR(--color_accent);
-    color: var(--color_text);
+    background-color: var(--color_accent);
+    color: var(--color_text_on_accent);
 }
 
 #form_select label:has(input:checked)>div {
-    color: var(--color_text);
+    color: var(--color_text_on_accent);
     background-color: oklab(from var(--color_accent) calc(l + 0.075) a b);
+}
+
+#form_query_input_options_container {
+    display: flex;
+    height: 25vh;
+    overflow: scroll;
+    border: .125rem solid var(--color_accent);
+    align-content: flex-start;
+    flex-direction: row;
+}
+
+.form_query_input {
+    display: flex;
+    flex-wrap: wrap;
+    height: 25vh;
+    overflow: scroll;
+    border: .125rem solid var(--color_accent);
+    align-content: flex-start;
 }
 
 .form_query_input_field_container {
     display: flex;
+    justify-content: center;
+}
+
+.form_query_input_field_container input, .form_query_input_field_container label, .form_query_input_null_container {
+    margin: 1rem;
 }
 
 .form_query_input_field_container input {
@@ -74,5 +155,157 @@ div + div {
 }
 
 .form_query_input_field_container label {
-    order: 0
+    order: 0;
+    display: flex;
+    align-items: center;
+}
+
+#form_query_options {
+    flex-grow: 1;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.form_query_options_field_container {
+    display: flex;
+    justify-content: flex-end;
+    margin: .5rem;
+    align-items: center;
+}
+
+
+/* Start CSS Rules for Table Method */
+
+tbody {
+  display: flex;
+  gap: 1rem;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  width: 75vw;
+}
+
+tr {
+  scroll-snap-align: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  text-align: left;
+  padding: 0rem 1rem;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto;
+  border: solid .125rem var(--color_accent);
+}
+
+td {
+    border: none;
+    line-height: 1rem;
+}
+
+/* End CSS Rules for DIV Method */
+
+div.table_body {
+  display: flex;
+  gap: 1rem;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  /* width: 75vw; */
+}
+
+&:has([name="display_output_column"]:checked) {
+    div.table_body {
+        overflow-x: auto;
+        flex-direction: column;
+    }
+}
+
+div.table_row {
+  scroll-snap-align: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto;
+  border: solid .125rem var(--color_accent);
+}
+
+div.table_cell {
+    border: none;
+    display: flex;
+}
+
+div.table_cell_text + div.table_cell_text {
+    margin: 0;
+}
+
+div.table_cell + div.table_cell, div.table_cell {
+    margin-bottom: .5rem;
+    margin-top: 0;
+}
+
+div.table_cell div.table_cell_text:not(:first-of-type) {
+  margin-left: .5rem;
+  text-align: right;
+  flex-grow: 1;
+}
+
+/* Start custom order overrides for DIV method */
+
+div.data_field_job_name {
+    order: 0;
+}
+
+div.data_field_process_name {
+    order: 1;
+}
+
+.data_field_peoplecode_ID_1 {order: 01}
+.data_field_peoplecode_ID_2 {order: 03}
+.data_field_peoplecode_ID_3 {order: 05}
+.data_field_peoplecode_ID_4 {order: 07}
+.data_field_peoplecode_ID_5 {order: 09}
+.data_field_peoplecode_ID_6 {order: 11}
+.data_field_peoplecode_ID_7 {order: 13}
+
+.data_field_peoplecode_value_1 {order: 02}
+.data_field_peoplecode_value_2 {order: 04}
+.data_field_peoplecode_value_3 {order: 06}
+.data_field_peoplecode_value_4 {order: 08}
+.data_field_peoplecode_value_5 {order: 10}
+.data_field_peoplecode_value_6 {order: 12}
+.data_field_peoplecode_value_7 {order: 14}
+
+.data_field_peoplecode_pctext {order: 99}
+
+/* End custom order overrides for DIV method */
+
+
+/* End CSS Rules for DIV Method */
+
+input[type='checkbox'] {
+    /* height: 100%; */
+    margin: .5rem;
+}
+
+/*
+#form_query_input:has(.form_query_input_field_container) {
+    border-right: solid .125rem var(--color_accent);
+}
+*/
+
+#pane_input button {
+    margin: 1rem 0rem;
+}
+
+.box_input_container {
+    /* border: red 1px solid; */
+}
+
+button {
+    color: var(--color_text_on_accent);
 }

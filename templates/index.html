@@ -19,6 +19,12 @@
 <script src="{{ url_for('static', filename='js/functions.js') }}"></script>
 
 <body>
+    <header>
+        <label>
+            <input type="checkbox" name="toggle-color-scheme">
+            <span>Toggle Light/Dark Mode</span>
+        </label>
+    </header>
     <main>
         <div id="main_container" hx-trigger="load" hx-get="htmx_pane_login">
         </div>
